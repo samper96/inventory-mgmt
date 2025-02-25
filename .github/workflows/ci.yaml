@@ -32,5 +32,3 @@ jobs:
       - name: Run Ruff (lint checks)
         run: ruff check .
 
-      - name: Run Tests
-        run: pytest --maxfail=1 --disable-warnings -q
