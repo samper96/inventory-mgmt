@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"  # or any other version
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          # If you have dev requirements in a separate file, install those too
+          # pip install -r dev-requirements.txt
+
+      - name: Install ruff
+        run: pip install ruff
+
+      - name: Run Ruff (lint checks)
+        run: ruff check .
+
+      - name: Run Tests
+        run: pytest --maxfail=1 --disable-warnings -q
