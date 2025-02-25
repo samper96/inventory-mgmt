@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
           # If you have dev requirements in a separate file, install those too
           # pip install -r dev-requirements-dev.txt
 
