@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:14
+    env_file:
+      - .env
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  
+  redis:
+    image: redis:6
+    container_name: inventory_redis
+    ports:
+      - "6379:6379"
+  
+  app:
+    build: .
+    depends_on:
+      - db
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+  
+  worker:
+    build: .
+    container_name: inventory_worker
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - .env
+    command: celery -A src.tasks worker -l info -B
+
+volumes:
+  db-data: {}
