@@ -21,14 +21,13 @@ An **Inventory Management** system built with **FastAPI**, **PostgreSQL**, **Cel
    - Multiple clients can subscribe for instant updates  
 
 3. **Low-Stock Alerts**  
-   - Periodic or on-demand background tasks (powered by Celery or APScheduler)  
-   - Logs or records alerts when product stock falls below a threshold  
+   - Periodic or on-demand background tasks (powered by Celery)  
+   - Logs alerts when product stock falls below a threshold  
 
 4. **Dockerized Setup**  
-   - `docker-compose` manages containers for the **API**, **database**, **Celery worker**, and **Redis** (if used)  
+   - `docker-compose` manages containers for the **API**, **database**, **Celery worker**, and **Redis**
 
 5. **Testing**  
-   - **Unit Tests**: Check individual components (routes, utils, etc.)  
    - **System Tests**: Validate end-to-end functionality, including real-time WebSocket broadcasts and background tasks  
 
 ---
@@ -42,7 +41,7 @@ An **Inventory Management** system built with **FastAPI**, **PostgreSQL**, **Cel
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/inventory_mgmt.git
+   git clone https://github.com/samper96/inventory-mgmt
    cd inventory_mgmt
     ```
 
@@ -66,7 +65,7 @@ An **Inventory Management** system built with **FastAPI**, **PostgreSQL**, **Cel
 
     - This starts:
         * db: PostgreSQL database
-        * redis: (if used) for Celery broker/result store
+        * redis: Celery broker/result store
         * app: FastAPI application (on port 8000)
         * worker: Celery worker listening for background jobs
 
